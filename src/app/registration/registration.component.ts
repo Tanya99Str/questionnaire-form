@@ -98,15 +98,17 @@ export class RegistrationComponent implements OnInit {
 
   checkEmail() {
     let email = this.userInfoFormGroup.get('email').value;
-    this._userService.getAllUsers().subscribe(next => {
-      if (next.find(el => el.email === email)) {
-        this.userInfoFormGroup.get('email').setErrors({emailIsExist: true});
-      } else {
-        this.userInfoFormGroup.get('email').setErrors(null);
-      }
-    }, error => {
-      console.error(error);
-    });
+    setTimeout(() => {
+      this._userService.getAllUsers().subscribe(next => {
+        if (next.find(el => el.email === email)) {
+          this.userInfoFormGroup.get('email').setErrors({emailIsExist: true});
+        } else {
+          this.userInfoFormGroup.get('email').setErrors(null);
+        }
+      }, error => {
+        console.error(error);
+      });
+      }, 2000);
   }
 
   validationData(control: AbstractControl) {
