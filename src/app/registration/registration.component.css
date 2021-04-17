@@ -1,0 +1,62 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  padding: 4vh 5vw;
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: bold;
+}
+
+form {
+  width: 70%;
+  margin: auto;
+}
+
+.user-info, .select-framework {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hobbies {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.hobby {
+  width: 45%;
+  margin-right: 10%;
+}
+
+.hobby:nth-child(2) {
+  margin-right: 0;
+}
+
+.btn-new {
+  float: right;
+}
+
+.buttons {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-top: 4vh;
+}
+
+.buttons button {
+  /*padding: 1.4vh 2vw;*/
+
+}
+
+.buttons button:last-child {
+  margin-left: 1vw;
+}
+

@@ -8,3 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'questionnaire-form';
 }
+// checkEmail(email: string) {
+//   this.createDb().users.find(value => {
+//     email === value.;
+//   })
+//
+// }

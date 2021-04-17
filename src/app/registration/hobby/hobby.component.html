@@ -1,0 +1,12 @@
+<form [formGroup]="hobbyFormGroup">
+  <mat-form-field class="example-form-field" style="width: 100%;">
+    <mat-label>Хобі</mat-label>
+    <input type="text" formControlName="name" matInput (input)="setValue()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue('name')">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-error *ngIf="hobbyFormGroup?.get('name').hasError('required')">
+      <span *ngIf="hobbyFormGroup.get('name').hasError('required')">Поле обов'язкове</span>
+    </mat-error>
+  </mat-form-field>
+</form>

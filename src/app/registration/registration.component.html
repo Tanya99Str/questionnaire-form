@@ -1,0 +1,92 @@
+<div class="container">
+  <h1>Форма реєстрації</h1>
+  <form [formGroup]="userInfoFormGroup">
+    <div class="user-info">
+      <mat-form-field class="example-form-field" style="width: 45%;">
+        <mat-label>Ім'я</mat-label>
+        <input matInput type="text" formControlName="firstName">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue('firstName')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="userInfoFormGroup?.get('firstName').hasError('required')">
+          <span *ngIf="userInfoFormGroup.get('firstName').hasError('required')">Поле обов'язкове</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-form-field" style="width: 45%;">
+        <mat-label>Прізвище</mat-label>
+        <input matInput type="text" formControlName="lastName">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue('lastName')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="userInfoFormGroup?.get('lastName').hasError('required')">
+          <span *ngIf="userInfoFormGroup?.get('lastName').hasError('required')">Поле обов'язкове</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="user-info">
+      <mat-form-field class="example-form-field" style="width: 45%;">
+        <input type="text" readonly (click)="picker.open()" formControlName="dateOfBirth" matInput #inputDatePicker
+               [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+        </mat-datepicker-toggle>
+        <mat-datepicker touchUi="true" #picker>
+          <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M4 9H6V11H4V9ZM18 4V18C18 19.1 17.1 20 16 20H2C0.89 20 0 19.1 0 18L0.00999999 4C0.00999999 2.9 0.89 2 2 2H3V0H5V2H13V0H15V2H16C17.1 2 18 2.9 18 4ZM2 6H16V4H2V6ZM16 18V8H2V18H16ZM12 11H14V9H12V11ZM8 11H10V9H8V11Z"
+              fill="#96ACF5"/>
+          </svg>
+        </mat-datepicker>
+        <mat-error *ngIf="userInfoFormGroup?.get('dateOfBirth').hasError('required')">
+          <span *ngIf="userInfoFormGroup.get('dateOfBirth').hasError('required')">Поле обов'язкове</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-form-field" style="width: 45%;">
+        <mat-label>Email</mat-label>
+        <input type="text" formControlName="email" matInput>
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="deleteValue('email')">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-error *ngIf="userInfoFormGroup?.get('email').hasError('required')||
+userInfoFormGroup.get('email').hasError('emailIsExist')||
+userInfoFormGroup.get('email').hasError('incorrect')">
+          <span *ngIf="userInfoFormGroup.get('email').hasError('required')">Поле обов'язкове</span>
+          <span *ngIf="userInfoFormGroup.get('email').hasError('incorrect')">Некоректний формат</span>
+          <span *ngIf="userInfoFormGroup.get('email').hasError('emailIsExist')">Дана пошта вже зареєстрована</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="select-framework">
+      <mat-form-field style="width: 45%">
+        <mat-label>Оберіть фреймворк</mat-label>
+        <mat-select (valueChange)="selectFramework($event)" [value]="selectedFramework">
+          <mat-option class="option" *ngFor="let one of frameworks" [value]="one">
+            <span>{{one?.name}}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 45%">
+        <mat-label>Оберіть версію</mat-label>
+        <mat-select (valueChange)="selectVersion($event)" [value]="selectedVersion">
+          <div class="container-options">
+            <mat-option class="option" *ngFor="let one of oneFramework?.frameworkVersion" [value]="one">
+              <span>{{one?.version}}</span>
+            </mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="hobbies">
+      <app-hobby *ngFor="let one of user?.hobby" class="hobby" [hobby]="one"></app-hobby>
+    </div>
+    <button class="pointer btn-new" mat-raised-button color="primary" (click)="newHobby()">Додати хобі</button>
+
+    <div class="buttons">
+      <button class="pointer cancel" mat-raised-button (click)="cancel()">Скасувати</button>
+      <button class="save" mat-raised-button color="primary" (click)="save()"
+              [disabled]="!userInfoFormGroup.valid&&!selectedFramework&&!selectedVersion">Зберегти
+      </button>
+    </div>
+  </form>
+
+
+</div>
