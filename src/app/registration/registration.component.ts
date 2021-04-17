@@ -47,7 +47,7 @@ export class RegistrationComponent implements OnInit {
     this.user.firstName = this.userInfoFormGroup.get('firstName').value;
     this.user.lastName = this.userInfoFormGroup.get('lastName').value;
     this.user.email = this.userInfoFormGroup.get('email').value;
-    this.user.dateOfBirth = this.configMoment(moment((<Date> this.userInfoFormGroup.get('dateOfBirth').value))).format('YYYY-MM-DD');
+    this.user.dateOfBirth = this.configMoment(moment((<Date> this.userInfoFormGroup.get('dateOfBirth').value))).format('DD-MM-YYYY');
     this.checkEmail();
     this._userService.getAllUsers().subscribe(next => {
       this.users = next;
@@ -72,6 +72,9 @@ export class RegistrationComponent implements OnInit {
     this.userInfoFormGroup.reset();
     this.user = new UserDto();
     this.user.hobby = [];
+    this.user.hobby[0] = '';
+    this.selectedVersion = new FrameworkVersionDto();
+    this.selectedFramework = new FrameworkDto();
   }
 
   selectFramework(event) {
@@ -129,6 +132,7 @@ export class RegistrationComponent implements OnInit {
       lastName: ['', [Validators.required]],
       dateOfBirth: ['', [Validators.required]],
       email: ['', [Validators.required]],
+      framework: [null],
       birthday: [null]
     }, {validators: this.validationData});
   }
