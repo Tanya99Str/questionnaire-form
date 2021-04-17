@@ -51,11 +51,6 @@ form {
   margin-top: 4vh;
 }
 
-.buttons button {
-  /*padding: 1.4vh 2vw;*/
-
-}
-
 .buttons button:last-child {
   margin-left: 1vw;
 }
