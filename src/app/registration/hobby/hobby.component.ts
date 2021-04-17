@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ export class HobbyComponent implements OnInit {
 
   hobbyFormGroup: FormGroup;
   @Input()hobby: any;
+  @Output()onChange = new EventEmitter();
 
   constructor(private _formBuilder: FormBuilder) {
   }
@@ -17,6 +18,7 @@ export class HobbyComponent implements OnInit {
   setValue() {
     this.hobby = this.hobbyFormGroup.get('name').value;
     console.log(this.hobbyFormGroup.get('name').value);
+    this.onChange.emit(this.hobby);
     console.log(this.hobby);
   }
 
